@@ -1,11 +1,7 @@
-class Credit_view():
-    def __inf__(self):
-        self.credit = ()
+class Credit_view:
 
-    def current_credit():
+    def __init__(self):
+        pass
 
-        print(self.credit)
-
-
-abc = Credit_view()
-abc.current_credit()
+    def current_credit(self, credit):
+        print(f"\n[잔액 조회] 현재까지 총 {credit:,} 크레딧을 획득하셨습니다.")
