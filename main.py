@@ -20,11 +20,11 @@ class Main:
         print(" 키움증권 이벤트 시스템에 오신 것을 환영합니다.")
         print("====================================")
 
-        # 1. 로그인 진행 (성공 시 즉시 메뉴로 이동)
+        # 1. 로그인 진행
         if not self.auth.login():
             return
 
-        # 2. 메인 메뉴 UI 출력
+        # 2. 메인 메뉴 UI
         while True:
             print("\n------------------------------------")
             print("키움증권 이벤트 참여하고 크레딧 받자!")
@@ -39,7 +39,6 @@ class Main:
             choice = input("원하시는 메뉴 번호를 선택하세요: ")
 
             if choice == "1":
-                # 1번을 누를 때만 추천인 코드를 입력받음
                 earned = self.auth.input_code()
                 if earned:
                     self.user_data[0] += earned
@@ -52,8 +51,9 @@ class Main:
                 self.user_data[0] = self.quiz.event_quiz()
 
             elif choice == "4":
+                # 메뉴 선택 즉시 홀짝 게임 실행
                 initial_credit = self.even_odd.credit
-                self.even_odd.start()
+                self.even_odd.play_game()
                 earned = self.even_odd.credit - initial_credit
                 self.user_data[0] += earned
 

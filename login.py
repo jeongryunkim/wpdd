@@ -6,7 +6,7 @@ class Recommendation:
         self.r = ['ohio5', 'kda05', 'kiwoom5', 'cheesecake96']
 
     def input_code(self):
-        """1번 메뉴(추천인 입력하기)를 눌렀을 때 실행되는 함수"""
+        """1번 메뉴(추천인 입력하기) 선택 시에만 실행되는 함수"""
         while True:
             p = input('추천인 코드를 입력해주세요>>> ')
 
@@ -17,7 +17,7 @@ class Recommendation:
                 print('코드를 정확히 입력해주세요.')
 
     def login(self):
-        """순수 로그인 기능만 수행"""
+        """순수 로그인 검증만 수행"""
         correct_id = "admin"
         correct_pw = "1234"
 
