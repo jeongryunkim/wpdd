@@ -2,6 +2,7 @@ from login import Recommendation
 from roulette import RouletteEvent
 from quiz import EventQuiz
 from credit_view import Credit_view
+from 홀짝야바위 import EvenOddGame
 
 
 class Main:
@@ -12,33 +13,36 @@ class Main:
         self.roulette = RouletteEvent()
         self.quiz = EventQuiz(self.user_data)
         self.credit_viewer = Credit_view()
+        self.even_odd = EvenOddGame()
 
     def main_page(self):
         print("====================================")
         print(" 키움증권 이벤트 시스템에 오신 것을 환영합니다.")
         print("====================================")
 
-        # 1. 로그인 진행 (성공하면 통과)
+        # 1. 로그인 진행 (성공 시 즉시 메뉴로 이동)
         if not self.auth.login():
             return
 
-        # 2. 로그인 성공 직후 즉시 메인 메뉴 UI 출력
+        # 2. 메인 메뉴 UI 출력
         while True:
             print("\n------------------------------------")
             print("키움증권 이벤트 참여하고 크레딧 받자!")
             print("1. 추천인 입력하기")
             print("2. 룰렛 게임하기")
             print("3. 퀴즈 참여하기")
-            print("4. 내 크레딧 조회하기")
+            print("4. 홀짝 야바위 게임하기")
+            print("5. 내 크레딧 조회하기")
             print("0. 종료")
             print("------------------------------------")
 
             choice = input("원하시는 메뉴 번호를 선택하세요: ")
 
             if choice == "1":
-                # 1번을 눌렀을 때만 추천인 입력 함수 호출
+                # 1번을 누를 때만 추천인 코드를 입력받음
                 earned = self.auth.input_code()
-                self.user_data[0] += earned
+                if earned:
+                    self.user_data[0] += earned
 
             elif choice == "2":
                 earned = self.roulette.start()
@@ -48,6 +52,12 @@ class Main:
                 self.user_data[0] = self.quiz.event_quiz()
 
             elif choice == "4":
+                initial_credit = self.even_odd.credit
+                self.even_odd.start()
+                earned = self.even_odd.credit - initial_credit
+                self.user_data[0] += earned
+
+            elif choice == "5":
                 self.credit_viewer.current_credit(self.user_data[0])
 
             elif choice == "0":
